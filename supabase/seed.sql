@@ -55,8 +55,7 @@ begin
       || E'DAY 6-8 - RAVELLO & DEPARTURE\nMove up to Ravello for two quiet nights above the coast - the gardens at Villa Cimbrone, a slower pace - then a private transfer to Naples for departure.\n\n'
       || E'WHAT IS INCLUDED\nEight nights across two hand-picked hotels, the private boat day, all ground transfers, and 24/7 support from your advisor while you travel.\n\n'
       || E'Estimated investment sits within your ~$7,200 target. Final pricing is confirmed once you approve the shape below.',
-      'sent')
-    returning id into t_desai; -- reuse var slot (id captured but not needed further)
+      'sent');
 
   insert into public.commissions (agent_id, trip_id, amount, rate, status) values
     (a, t_desai, 720, 10, 'pending'),
