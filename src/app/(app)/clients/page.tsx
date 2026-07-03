@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 
 export const dynamic = 'force-dynamic';
@@ -14,8 +15,13 @@ export default async function ClientsPage() {
 
   return (
     <div>
-      <h1 className="mb-1 text-2xl font-bold text-ink">Clients</h1>
-      <p className="mb-6 text-sm text-slate-500">Everyone you are planning for. Each agent sees only their own.</p>
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-ink">Clients</h1>
+          <p className="text-sm text-slate-500">Everyone you are planning for. Each agent sees only their own.</p>
+        </div>
+        <Link href="/clients/new" className="whitespace-nowrap rounded-lg bg-teal px-4 py-2 text-sm font-semibold text-white hover:bg-teal/90">+ New client</Link>
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         {((clients ?? []) as any[]).map((c) => (

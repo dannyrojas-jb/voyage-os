@@ -46,3 +46,43 @@ export interface Commission {
   status: CommissionStatus;
   created_at: string;
 }
+
+export type PlanId = 'starter' | 'pro' | 'agency';
+export type SubStatus = 'trialing' | 'active' | 'past_due' | 'canceled';
+export type InvoiceStatus = 'paid' | 'open' | 'void';
+
+export interface Subscription {
+  id: string;
+  agent_id: string;
+  plan: PlanId;
+  status: SubStatus;
+  seats: number;
+  current_period_end: string | null;
+  stripe_customer_id: string | null;
+  created_at: string;
+}
+
+export interface Invoice {
+  id: string;
+  agent_id: string;
+  number: string;
+  description: string | null;
+  amount: number;
+  status: InvoiceStatus;
+  issued_date: string;
+  created_at: string;
+}
+
+export interface TripFlight {
+  id: string;
+  agent_id: string;
+  trip_id: string;
+  origin: string;
+  destination: string;
+  depart_date: string | null;
+  airline: string | null;
+  cabin: string | null;
+  price: number | null;
+  source: string | null;
+  created_at: string;
+}

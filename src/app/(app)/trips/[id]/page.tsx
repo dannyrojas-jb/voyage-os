@@ -26,6 +26,13 @@ export default async function TripDetailPage({ params }: { params: { id: string 
     .order('created_at', { ascending: false });
   const proposals = (proposalsRaw ?? []) as any[];
 
+  const { data: flightsRaw } = await supabase
+    .from('trip_flights')
+    .select('*')
+    .eq('trip_id', params.id)
+    .order('created_at', { ascending: false });
+  const flights = (flightsRaw ?? []) as any[];
+
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
 
   return (
@@ -66,6 +73,21 @@ export default async function TripDetailPage({ params }: { params: { id: string 
         </p>
         <ProposalBuilder tripId={t.id} />
       </div>
+
+      {flights.length > 0 && (
+        <div className="mb-6">
+          <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-slate-500">Flights</h2>
+          <div className="space-y-2">
+            {flights.map((f) => (
+              <div key={f.id} className="flex flex-wrap items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm">
+                <span className="font-semibold text-ink">{f.airline}</span>
+                <span className="text-slate-500">{f.origin} &rarr; {f.destination}{f.depart_date ? ` · ${f.depart_date}` : ''}</span>
+                <span className="ml-auto font-semibold text-water">{money(f.price)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-slate-500">Proposals</h2>
       <div className="space-y-4">

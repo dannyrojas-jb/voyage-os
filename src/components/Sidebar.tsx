@@ -5,9 +5,12 @@ import { usePathname } from 'next/navigation';
 
 const NAV = [
   { href: '/dashboard', label: 'Dashboard' },
+  { href: '/pipeline', label: 'Pipeline' },
   { href: '/clients', label: 'Clients' },
   { href: '/trips', label: 'Trips' },
+  { href: '/flights', label: 'Flights' },
   { href: '/commissions', label: 'Commissions' },
+  { href: '/billing', label: 'Billing' },
 ];
 
 export default function Sidebar({ email }: { email?: string | null }) {
